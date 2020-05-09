@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <!-- Change set for table periodes creation -->
+    <changeSet author="MRA" id="08052020-ajout-plannings-001" context="INIT">
+
+        <createTable tableName="plannings">
+
+            <column autoIncrement="true" name="plan_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="plan_semaine" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <!--  changeSet pour l'index sur la clé primaire -->
+    <changeSet author="MRA" id="08052020-ajout-plannings-002" context="INIT">
+        <createIndex indexName="idx_plan_id" tableName="plannings" unique="true">
+            <column name="plan_id"/>
+        </createIndex>
+    </changeSet>
+
+    <!-- changeSet pour les données de test -->
+    <changeSet author="MRA" id="08052020-ajout-plannings-003"  context="TEST">
+        <loadData encoding="UTF-8"
+                  file="db/fakedata/PLANNINGS_DATA.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="plannings"
+                  usePreparedStatements="true">
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

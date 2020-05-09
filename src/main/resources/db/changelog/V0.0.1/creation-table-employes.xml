@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <!-- Change set for table employes creation -->
+    <changeSet author="MRA" id="03052020-ajout-emp-001" context="INIT">
+
+        <createTable tableName="employes">
+            <column autoIncrement="true" name="emp_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="emp_nom_complet" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="emp_date_naissance" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="emp_date_entree" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="emp_adresse" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="emp_tel" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="emp_mail" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="emp_contrat" type="INT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="emp_poste" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="mag_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+    <!--  changeSet pour l'index sur la clé primaire -->
+    <changeSet author="MRA" id="03052020-ajout-emp-002" context="INIT">
+        <createIndex indexName="idx_emp_id" tableName="employes" unique="true">
+            <column name="emp_id"/>
+        </createIndex>
+    </changeSet>
+
+    <!-- Change set for marche foreign key -->
+    <!-- One to Many relationship between operation and marche -->
+    <changeSet author="MRA" id="03052020-ajout-emp-003" context="INIT">
+        <addForeignKeyConstraint
+                baseTableName="employes"
+                baseColumnNames="mag_id"
+                constraintName="emp_mag_id_fk"
+                referencedTableName="magasins"
+                referencedColumnNames="mag_id"/>
+    </changeSet>
+
+    <!-- changeSet pour les données de test -->
+    <changeSet author="MRA" id="03052020-ajout-emp-004"  context="TEST">
+        <loadData encoding="UTF-8"
+                  file="db/fakedata/EMPLOYES_DATA.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="employes"
+                  usePreparedStatements="true">
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

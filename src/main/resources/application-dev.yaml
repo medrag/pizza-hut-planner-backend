@@ -1,0 +1,14 @@
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    contexts: INIT,TEST
+  jpa:
+    database: postgresql
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ph-planner
+    username: postgres
+    password: root
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: Europe/Paris

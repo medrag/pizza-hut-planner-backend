@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <!-- Change set for table periodes creation -->
+    <changeSet author="MRA" id="08052020-ajout-per-001" context="INIT">
+
+        <createTable tableName="periodes">
+
+            <column autoIncrement="true" name="per_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="per_nom" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="per_date_debut" type="TIME(HHMM)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="per_date_fin" type="TIME(HHMM)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="jr_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <!--  changeSet pour l'index sur la clé primaire -->
+    <changeSet author="MRA" id="08052020-ajout-per-002" context="INIT">
+        <createIndex indexName="idx_per_id" tableName="periodes" unique="true">
+            <column name="per_id"/>
+        </createIndex>
+    </changeSet>
+
+    <!-- Change set for jour foreign key -->
+    <!-- One to Many relationship between jour and periode -->
+    <changeSet author="MRA" id="08052020-ajout-per-003" context="INIT">
+        <addForeignKeyConstraint
+                baseTableName="periodes"
+                baseColumnNames="jr_id"
+                constraintName="per_jr_id_fk"
+                referencedTableName="jours"
+                referencedColumnNames="jr_id"/>
+    </changeSet>
+
+    <!-- changeSet pour les données de test -->
+    <changeSet author="MRA" id="08052020-ajout-per-004"  context="TEST">
+        <loadData encoding="UTF-8"
+                  file="db/fakedata/PERIODES_DATA.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="periodes"
+                  usePreparedStatements="true">
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

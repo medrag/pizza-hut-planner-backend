@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <!-- Change set for table periodes creation -->
+    <changeSet author="MRA" id="08052020-ajout-jours-001" context="INIT">
+
+        <createTable tableName="jours">
+
+            <column autoIncrement="true" name="jr_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="jr_nom" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jr_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="plan_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <!--  changeSet pour l'index sur la clé primaire -->
+    <changeSet author="MRA" id="08052020-ajout-jours-002" context="INIT">
+        <createIndex indexName="idx_jr_id" tableName="jours" unique="true">
+            <column name="jr_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="MRA" id="08052020-ajout-jours-003" context="INIT">
+        <addForeignKeyConstraint
+                baseTableName="jours"
+                baseColumnNames="plan_id"
+                constraintName="jr_plan_id_fk"
+                referencedTableName="plannings"
+                referencedColumnNames="plan_id"/>
+    </changeSet>
+
+    <!-- changeSet pour les données de test -->
+    <changeSet author="MRA" id="08052020-ajout-jours-004"  context="TEST">
+        <loadData encoding="UTF-8"
+                  file="db/fakedata/JOURS_DATA.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="jours"
+                  usePreparedStatements="true">
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

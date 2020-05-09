@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <!-- Change set for table magasins creation -->
+    <changeSet author="MRA" id="03052020-ajout-mag-001" context="INIT">
+
+        <createTable tableName="magasins">
+            <column autoIncrement="true" name="mag_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="mag_nom" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mag_adresse" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mag_entreprise" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mag_tel" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+    <!--  changeSet pour l'index sur la clé primaire -->
+    <changeSet author="MRA" id="03052020-ajout-mag-002" context="INIT">
+
+        <createIndex indexName="idx_mag_id" tableName="magasins" unique="true">
+            <column name="mag_id"/>
+        </createIndex>
+
+    </changeSet>
+
+
+    <!-- changeSet pour les données de test -->
+    <changeSet author="MRA" id="03052020-ajout-mag-004"  context="TEST">
+        <loadData encoding="UTF-8"
+                  file="db/fakedata/MAGASINS_DATA.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="magasins"
+                  usePreparedStatements="true">
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>
