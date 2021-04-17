@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -18,7 +17,7 @@ public class Jour {
     private String nom;
     @Column(name = "jr_date")
     private Date date;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "jr_id")
-    private List<Periode> periodes;
+    @ManyToOne
+    @JoinColumn(name = "plan_id", nullable = false)
+    private Planning planning;
 }

@@ -23,6 +23,9 @@
             <column name="per_date_fin" type="TIME(HHMM)">
                 <constraints nullable="true"/>
             </column>
+            <column name="per_valeur" type="VARCHAR(250)">
+                <constraints nullable="true"/>
+            </column>
             <column name="jr_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>

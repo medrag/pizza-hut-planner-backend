@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -31,7 +32,7 @@ public class Employee {
     private int contrat;
     @Column(name = "emp_poste")
     private String poste;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "mag_id")
     private Magasin magasin;
 }

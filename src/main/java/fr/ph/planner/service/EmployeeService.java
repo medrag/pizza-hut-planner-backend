@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -45,5 +46,17 @@ public class EmployeeService {
 
     public void deleteEmployeesByMagasinId(Long magasinId) {
         this.employeRepository.deleteAllByMagasinId(magasinId);
+    }
+
+    public List<Employee> getEmployeesByMagasinId(Long magasinId) {
+        return this.employeRepository.getAllByMagasinId(magasinId);
+    }
+
+    public Employee getEmployeeById(Long id) {
+        Optional<Employee> employee = this.employeRepository.findById(id);
+        if(employee.isPresent()) {
+            return employee.get();
+        }
+        return null;
     }
 }

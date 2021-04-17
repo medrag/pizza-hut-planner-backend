@@ -22,4 +22,9 @@ public class Periode {
     @Column(name = "per_date_fin")
     @JsonFormat(pattern = "HH:mm")
     private Date dateFin;
+    @Column(name= "per_valeur")
+    private String valeur;
+    @ManyToOne
+    @JoinColumn(name = "jr_id", nullable = false)
+    private Jour jour;
 }

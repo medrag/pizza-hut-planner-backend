@@ -20,6 +20,11 @@ public class EmployeeController {
         return ResponseEntity.ok(this.employeeService.getEmployeesList());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.employeeService.getEmployeeById(id));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         this.employeeService.deleteEmployee(id);
@@ -35,4 +40,10 @@ public class EmployeeController {
     public ResponseEntity<Employee> editEmployee(@RequestBody Employee employee) {
         return ResponseEntity.ok(this.employeeService.editEmployee(employee));
     }
+
+    @GetMapping("/magasin/{id}")
+    public ResponseEntity<List<Employee>> getEmployeesByMagasinId(@PathVariable Long id) {
+        return ResponseEntity.ok(this.employeeService.getEmployeesByMagasinId(id));
+    }
+
 }

@@ -7,7 +7,6 @@
     <include file="db/changelog/V0.0.1/creation-table-magasins.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/V0.0.1/creation-table-employes.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/V0.0.1/creation-table-plannings.xml" relativeToChangelogFile="false"/>
-    <include file="db/changelog/V0.0.1/creation-table-employes-plannings.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/V0.0.1/creation-table-jours.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/V0.0.1/creation-table-periodes.xml" relativeToChangelogFile="false"/>
 
